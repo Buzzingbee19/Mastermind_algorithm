@@ -1,13 +1,33 @@
+//
+//  code.h
+//  DraftMasterMind
+//
+//  Created by Adam Bechtold on 1/22/17.
+//  Copyright © 2017 Adam Bechtold. All rights reserved.
+//
+
 #ifndef code_h
 #define code_h
 
-class code {
-	public:
-		code(int n, int m);
-		int checkCorrect (vector<int> guess); //returns number of correct digits in the correct location
-		int checkIncorrect (vector<int> guess); //returns number of correct digits in the incorrect location
-	private:
-		int n; //specifies number of digits random generator will use to determine secret code
-		int m; //specifies range of digits random generator will use to determine secret code
-		vector<int> random_code_gen();
+#include <vector>
+
+using namespace std;
+
+class Code {
+public:
+    //constructor
+    Code(int n, int m);
+    //number of digits in guess that are in the correct place
+    int checkCorrect(vector<long> guess);
+    //number of digits in the guess that are also in the code but in the incorrent position
+    int checkIncorrent(vector<long> guess);
+    
+private:
+    int n; //code length
+    int m; //range of digits
+    vector<long> secretCode;
+    vector<long> generateCode(); //generates secret code as a vector
 };
+
+
+#endif /* code_h */
