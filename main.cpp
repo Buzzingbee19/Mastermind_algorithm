@@ -16,4 +16,7 @@ void main(){
 		cin>>guess(i);
 	} 
 	int numcorrect = mastercode.checkCorrect(guess);
+	int numincorrect = mastercode.checkIncorrect(guess);
+	cout<<"There were "<<numcorrect<<" correct numbers in their correct location, and ""<<numincorrect<<"" numbers in their incorrect location. \n"";
+
 };
