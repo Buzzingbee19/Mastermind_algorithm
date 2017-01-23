@@ -7,7 +7,7 @@
  #include <iostream>
  #include "code.h"
  #include "d_random.h"
-using namespace std
+using namespace std;
 
  void main(){
  
