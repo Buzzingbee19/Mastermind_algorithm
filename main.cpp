@@ -7,8 +7,6 @@
 //
 
 //QUESTIONS
-// 1 -> SEE code.cpp
-// 2 -> SEE code.h
 // 3) naming conventions for classes
 
 #include <iostream>
@@ -17,8 +15,6 @@
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
     
     //start
     Code myCode = Code(5, 10);
@@ -33,9 +29,15 @@ int main(int argc, const char * argv[]) {
     
     
     //check correctness
+    cout << "\nresponse format: [correct digit in correct posistion, correct digit in wrong position]\n" << endl;
+    cout << "guess:       (5, 0, 3, 2, 6) -> ";
     cout << "[" << myCode.checkCorrect(guessOne) << "," << myCode.checkIncorrect(guessOne) << "]" << endl;
+    cout << "geuss:       (2, 1, 2, 2, 2) -> ";
     cout << "[" << myCode.checkCorrect(guessTwo) << "," << myCode.checkIncorrect(guessTwo) << "]" << endl;
+    cout << "guess:       (1, 3, 3, 4, 5) -> ";
     cout << "[" << myCode.checkCorrect(guessThree) << "," << myCode.checkIncorrect(guessThree) << "]" << endl;
+    
+    cout << endl;
     
     return 0;
 }
