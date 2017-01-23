@@ -1,30 +1,37 @@
 //
 //  code.cpp
-//  DraftMasterMind
+//  This is the implementation file for our code class.  This file excecutes the
+//  functions our main file will use to generate the random code,  compare
+//  the guess made by the player, and return the number of guesses that are
+//  correct and those that are correct but in the wrong spot.
 //
-//  Created by Adam Bechtold on 1/22/17.
-//  Copyright © 2017 Adam Bechtold. All rights reserved.
+//  Created by Adam Bechtold & Patrick Buzza on 1/22/17.
+//  Copyright © 2017 Adam Bechtold & Patrick Buzza. All rights reserved.
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <vector>
 #include "code.h"
 #include "d_random.h"
 
-Code::Code(int n, int m) {
+Code::Code(int n, int m)
+{
     this->n = n; //code length
     this->m = m; //range of digits
+    //calls the generateCode function to randomly generate a code of length n.
     this->secretCode = generateCode();
 }
 //generate random code -- it's SECRET
-vector<long> Code::generateCode(){
+vector<long> Code::generateCode()
+{
     vector<long> code;
-    for(int i = 0; i < this->n; i++) {
+
+    for(int i = 0; i < this->n; i++)
+    {
         //randomNumber num = randomNumber(this->m);
         int num = rand() % this->m;
         code.push_back(num);
     }
-
-    //cout 
 
     for (auto i = code.begin(); i != code.end(); ++i)
         std::cout << *i << ' ';
@@ -33,16 +40,17 @@ vector<long> Code::generateCode(){
 
     return code;
 }
-
 //return the number of digits that are in the correct posistion
-int Code::checkCorrect(vector<long> guess) {
+int Code::checkCorrect(vector<long> guess)
+{
     int correct = 0;
 
     //count the number of digits that are in the same position in the guess and the secret code
-    for(int i = 0; i < this-> n; i++) {
-        if (this->secretCode[i] == guess[i]) {
+    for(int i = 0; i < this-> n; i++)
+    {
+
+        if (this->secretCode[i] == guess[i])
             correct++;
-        }
     }
 
     return correct;
