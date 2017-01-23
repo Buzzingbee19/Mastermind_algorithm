@@ -24,7 +24,7 @@ public:
     int checkCorrect(vector<long> guess);
     //number of digits in the guess that are also in the code but in the incorrect position
     int checkIncorrect(vector<long> guess);
-    
+
 private:
     int n; //code length
     int m; //range of digits
