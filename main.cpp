@@ -7,7 +7,7 @@
  #include <iostream>
  #include "code.h"
  #include "d_random.h"
-using namespace std
+using namespace std;
 
  void main(){
  int range, digits;  //initialize the variables taken in from the users to construct our code class
