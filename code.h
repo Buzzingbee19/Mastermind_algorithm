@@ -8,6 +8,11 @@
 //  Created by Adam Bechtold & Patrick Buzza on 1/22/17.
 //  Copyright © 2017 Adam Bechtold & Patrick Buzza. All rights reserved.
 //
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
 #ifndef code_h
 #define code_h
 
@@ -27,7 +32,7 @@ public:
     //returns number of digits in the guess that are also in the code but in the
     //incorrect position, given user guess
     int checkIncorrect(vector<long> guess);
-
+    
 private:
     int n; //code length
     int m; //range of digits
