@@ -1,6 +1,4 @@
-//
-//  code.h
-//  This is the header file for our code class.  This file defintes the
+//  This is the header file for our code class.  This file defines the
 //  functions our main file will use to generate the random code,  compare
 //  the guess made by the player, and return the number of guesses that are
 //  correct and those that are correct but in the wrong spot.
@@ -8,11 +6,6 @@
 //  Created by Adam Bechtold & Patrick Buzza on 1/22/17.
 //  Copyright © 2017 Adam Bechtold & Patrick Buzza. All rights reserved.
 //
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
 #ifndef code_h
 #define code_h
 
@@ -20,7 +13,8 @@
 
 using namespace std;
 
-class Code {
+class Code
+{
 public:
 
     //constructor

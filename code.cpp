@@ -1,109 +1,81 @@
-//
-//  code.cpp
-//  This is the implementation file for our code class.  This file excecutes the
+//  This is the implementation file for our code class.  This file executes the
 //  functions our main file will use to generate the random code,  compare
 //  the guess made by the player, and return the number of guesses that are
 //  correct and those that are correct but in the wrong spot.
-//
-<<<<<<< HEAD
-//  Created by Adam Bechtold & Patrick Buzza on 1/22/17.
 //  Copyright © 2017 Adam Bechtold & Patrick Buzza. All rights reserved.
-=======
-//  Created by Adam Bechtold on 1/22/17.
-//  Copyright © 2017 Adam Bechtold. All rights reserved.
-//
 
->>>>>>> origin/master
-
-#include <stdlib.h>
-//
-
-#include <stdio.h>
 #include <vector>
 #include "code.h"
 #include "d_random.h"
+using namespace std;
 
 Code::Code(int n, int m)
+//constructor for code class
 {
     this->n = n; //code length
     this->m = m; //range of digits
-<<<<<<< HEAD
+
     //calls the generateCode function to randomly generate a code of length n.
-=======
-    
->>>>>>> origin/master
     this->secretCode = generateCode();
 }
 
-//generate random code -- it's SECRET
-<<<<<<< HEAD
 vector<long> Code::generateCode()
+//generate random code -- it's SECRET
 {
     vector<long> code;
-
-    for(int i = 0; i < this->n; i++)
-    {
-        //randomNumber num = randomNumber(this->m);
-        int num = rand() % this->m;
-        code.push_back(num);
-    }
-
-=======
-vector<long> Code::generateCode() {
-    vector<long> code;
-    
     randomNumber num = randomNumber(10);
     
-    for(int i = 0; i < this->n; i++) {
-                //int num = rand() % this->m;
+    for (int i = 0; i < this->n; i++)
+    {
+        //int num = rand() % this->m;
         long number = num.random(10);
         code.push_back(number);
     }
     
     //tell the secret code - SPILL THE BEANS
     cout << "secret code: [";
->>>>>>> origin/master
     for (auto i = code.begin(); i != code.end(); ++i)
         std::cout << *i << ", ";
     
     cout << "]" << endl;
-    
     return code;
-}
-//return the number of digits that are in the correct posistion
+} //end of generateCode function
+
 int Code::checkCorrect(vector<long> guess)
+//return the number of digits that are in the correct posistion
 {
     int correct = 0;
     
     //count the number of digits that are in the same position in the guess and the secret code
-    for(int i = 0; i < this-> n; i++)
+    for (int i = 0; i < this-> n; i++)
     {
-
         if (this->secretCode[i] == guess[i])
             correct++;
     }
-    
     return correct;
 }
 
+int Code::checkIncorrect(vector<long> guess)
 //number of digits in the guess that are also in the code but in the incorrect position
-int Code::checkIncorrect(vector<long> guess) {
+{
     int incorrect = 0;
     vector<int> checked;
     
-    for (int i = 0; i < this->n; i++) {
+    for (int i = 0; i < this->n; i++)
+    {
         //check if digit has already been checked
         std::vector<int>::iterator it;
         it = std::find(checked.begin(), checked.end(), this->secretCode[i]);
         
-        if (it != checked.end()) { //item is not in the checked list
-            for (int j = 0; j < this->n; j++) {
-                if (this->secretCode[i] == guess[i]) {
+        if (it != checked.end()) //item is not in the checked list
+        {
+            for (int j = 0; j < this->n; j++)
+            {
+                if (this->secretCode[i] == guess[i])
                     incorrect++;
-                }
+
             }
         }
     }
-    
     return incorrect;
-}
+} //end checkIncorrect
