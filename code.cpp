@@ -36,8 +36,11 @@ vector<long> Code::generateCode()
     
     //print the secret code to the terminal - for testing purpoees
     cout << "secret code: [";
-    for (int i = 0; i < code.size(); i++) {
+
+    for (int i = 0; i < code.size(); i++)
+    {
         cout << code[i];
+
         if (i != code.size() - 1)
             cout << ", ";
     }
@@ -69,7 +72,8 @@ int Code::checkIncorrect(vector<long> guess)
     vector<long> checkedIndices; //tracks which indices of have been processed
     
     //find which indices were covered in checkCorrect
-    for (int i = 0; i < this->n; i++) {
+    for (int i = 0; i < this->n; i++)
+    {
         if (this->secretCode[i] == guess[i])
             checkedIndices.push_back(i);
     }
@@ -83,7 +87,9 @@ int Code::checkIncorrect(vector<long> guess)
         {
             //ensure that j is not one of the indices that has been checked
             bool found = false;
-            for (int a = 0; a < checkedIndices.size(); a++) {
+
+            for (int a = 0; a < checkedIndices.size(); a++)
+            {
                 if (j == checkedIndices[a])
                     found = true; //this index was used
             }
@@ -96,7 +102,8 @@ int Code::checkIncorrect(vector<long> guess)
             //  add secretCode index to checked vector
             //  increment incorrect variable
             //  break from loop to avoid double counting
-            if (guess[i] == this->secretCode[j]) {
+            if (guess[i] == this->secretCode[j])
+            {
                 checkedIndices.push_back(j);
                 incorrect++;
                 break;
