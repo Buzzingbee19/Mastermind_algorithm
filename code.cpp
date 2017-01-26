@@ -15,16 +15,44 @@ Code::Code(int n, int m)
 {
     this->n = n; //code length
     this->m = m; //range of digits
-
-    //calls the generateCode function to randomly generate a code of length n.
-    this->secretCode = generateCode();
 }
 
-vector<long> Code::generateCode()
+void Code::printCode()
+//print out the object's code
+{
+    cout << "(";
+    for (int i = 0; i < this->n; i++) {
+        cout << this->code[i];
+        if (i != this->n - 1)
+            cout << " ";
+    }
+    cout << ")";
+}
+
+GuessCode::GuessCode(int n, int m, vector<long> code) : Code(n,m)
+//constructor modiifcations for GuessCode child class
+{
+    this->code = code;
+}
+
+vector<long> GuessCode::getCode()
+//retrieve code vector - only applies to guess codes
+{
+    return this->code;
+}
+
+
+SecretCode::SecretCode(int n, int m) : Code(n,m)
+//constructor modifications for the SecretCode child class
+{
+    this->code = generateCode();
+}
+
+vector<long> SecretCode::generateCode()
 //generate random code to be stored in the secretCode private field
 {
     vector<long> code; //creates empty code vector
-    randomNumber num = randomNumber(9); //instantiates randomNumber object
+    randomNumber num = randomNumber(1203); //instantiates randomNumber object
     
     //create random numbers in desired range and assignes them to code vector
     for (int i = 0; i < this->n; i++)
@@ -33,24 +61,14 @@ vector<long> Code::generateCode()
         long number = num.random(this->m);
         code.push_back(number);
     }
-    
-    //print the secret code to the terminal - for testing purpoees
-    cout << "secret code: [";
 
-    for (int i = 0; i < code.size(); i++)
-    {
-        cout << code[i];
-
-        if (i != code.size() - 1)
-            cout << ", ";
-    }
-    cout << "]" << endl;
     
     //return secret code for allocation to private secretCode field
     return code;
 } //end of generateCode function
 
-int Code::checkCorrect(vector<long> guess)
+
+int SecretCode::checkCorrect(GuessCode guess)
 //return the number of digits that are in the correct posistion
 {
     int correct = 0;
@@ -59,52 +77,62 @@ int Code::checkCorrect(vector<long> guess)
     // and the secret code
     for (int i = 0; i < this->n; i++)
     {
-        if (this->secretCode[i] == guess[i])
+        if (this->code[i] == guess.getCode()[i])
             correct++;
     }
     return correct;
 } //end of checkCorrect function
 
-int Code::checkIncorrect(vector<long> guess)
+int SecretCode::checkIncorrect(GuessCode guess)
 //number of digits in the guess in the code but in the incorrect position
 {
     int incorrect = 0;
-    vector<long> checkedIndices; //tracks which indices of have been processed
+    vector<long> secretIndices; //tracks counted indices in secret code
+    vector<long> guessIndices; //tracks counted indices in guess code
     
     //find which indices were covered in checkCorrect
-    for (int i = 0; i < this->n; i++)
-    {
-        if (this->secretCode[i] == guess[i])
-            checkedIndices.push_back(i);
+    for (int i = 0; i < this->n; i++) {
+        if (this->code[i] == guess.getCode()[i]) {
+            secretIndices.push_back(i);
+            guessIndices.push_back(i);
+        }
     }
     
     //moves through elements in the guess to see if they are in secret code
     for (int i = 0; i < this->n; i++)
     {
+        //check if this index has been checking in the guess code
+        bool guessChecked = false;
+        for(int a = 0; a < guessIndices.size(); a++) {
+            if (i == guessIndices[a])
+                guessChecked = true;
+        }
+        
+        //if this has been checked, skip this guess index
+        if (guessChecked)
+            continue;
+        
         //check it any of secretCode's elements match guess[i]
         // ignore elements in secretCode that have already been counted
         for (int j = 0; j < this->n; j++)
         {
             //ensure that j is not one of the indices that has been checked
-            bool found = false;
-
-            for (int a = 0; a < checkedIndices.size(); a++)
-            {
-                if (j == checkedIndices[a])
-                    found = true; //this index was used
+            bool secretChecked = false;
+            for (int a = 0; a < secretIndices.size(); a++) {
+                if (j == secretIndices[a])
+                    secretChecked = true; //this index was used
             }
             
             //skip j index if it has been used
-            if (found)
+            if (secretChecked)
                 continue;
             
             //if same digit found in different indices
             //  add secretCode index to checked vector
             //  increment incorrect variable
             //  break from loop to avoid double counting
-            if (guess[i] == this->secretCode[j])
-            {
-                checkedIndices.push_back(j);
+            if (guess.getCode()[i] == this->code[j]) {
+                secretIndices.push_back(j);
                 incorrect++;
                 break;
             }
@@ -114,5 +142,3 @@ int Code::checkIncorrect(vector<long> guess)
     //return number of incorrect
     return incorrect;
 } //end checkIncorrect
-
-//end of class Code method definitions
