@@ -5,32 +5,46 @@
 //
 //  Adam Bechtold & Patrick Buzza
 
-#ifndef code_h
-#define code_h
+#ifndef Code_h
+#define Code_h
 
 #include <vector>
-
 using namespace std;
 
 class Code
 {
 public:
-
     //constructor
     Code(int n, int m);
-
-    //returns number of digits in guess that are in the correct place
-    int checkCorrect(vector<long> guess);
-
-    //returns number of digits in the guess that are also in the code but in the
-    //incorrect position, given user guess
-    int checkIncorrect(vector<long> guess);
     
-private:
-    int n; //code length
-    int m; //range of digits
-    vector<long> secretCode; //randomly generated code
-    vector<long> generateCode(); //generates secret code as a vector
+    //print out the code field of the Code
+    void printCode();
+    
+protected:
+    int n;
+    int m;
+    vector<long> code;
+};
+    
+class GuessCode: public Code {
+public:
+    //constructor
+    GuessCode(int n, int m, vector<long> code);
+    
+    //retrieve code vector - only applies to guesss codes
+    vector<long> getCode();
+    
 };
 
-#endif //end of header file
+class SecretCode: public Code {
+public:
+    SecretCode(int n, int m);
+    int checkCorrect(GuessCode guess);
+    int checkIncorrect(GuessCode guess);
+    
+private:
+    vector<long> generateCode();
+};
+
+
+#endif /* Code_h */
