@@ -3,9 +3,8 @@
 //  the guess made by the player, and return the number of guesses that are
 //  correct and those that are correct but in the wrong spot.
 //
-//  Created by Adam Bechtold & Patrick Buzza on 1/22/17.
-//  Copyright © 2017 Adam Bechtold & Patrick Buzza. All rights reserved.
-//
+//  Adam Bechtold & Patrick Buzza
+
 #ifndef code_h
 #define code_h
 
@@ -34,4 +33,4 @@ private:
     vector<long> generateCode(); //generates secret code as a vector
 };
 
-#endif /* code_h */
+#endif //end of header file
