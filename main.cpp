@@ -1,31 +1,16 @@
-<<<<<<< HEAD
- //  main.cpp
- //  DraftMasterMind
- //
- //  Created by Adam Bechtold on 1/22/17.
- //  Copyright © 2017 Adam Bechtold. All rights reserved.
- //
- #include <iostream>
- #include "code.h"
- #include "d_random.h"
-=======
-//  main.cpp
-//  DraftMasterMind
-//
+//  maine file of our program, which
 //  Created by Adam Bechtold on 1/22/17.
 //  Copyright © 2017 Adam Bechtold. All rights reserved.
-//
+
 #include <iostream>
 #include "code.h"
-#include "d_random.h"
->>>>>>> origin/master
 using namespace std;
 
 int main(){
-    
+    /*
     //start
     Code myCode = Code(5, 10);
-    
+
     //take a guess
     long guessOneArray[] = {5, 0, 3, 2, 6};
     long guessTwoArray[] = {2, 1, 2, 2, 2};
@@ -46,25 +31,29 @@ int main(){
     
     cout << endl;
     
-    
+    */
     
     
     //Playing a new game
-    int range, digits;  //initialize the variables taken in from the users to construct our code class
-    cout<<"Welcome to Mastermind, the scintillating game to test your reasoning skills! \n How many digits would like to have in your code?";
-    cin>>digits;
-    cout<<"What would you like your range of numbers to be?";
-    cin>>range;
-    Code mastercode(digits, range);
-    vector<long> guess;
+    vector<long> guess;  //initializes the guess vector
     long responseNumber;
-    for (int i=0; i<digits;i++){
-        cout<<"Please input your guess for value "<<i<<"\n";
+    int range, digits;  //initialize the variables taken in from the users to construct our code class
+    cout << "Welcome to Mastermind, the scintillating game to test your reasoning skills! \n";
+    cout << "How many digits would like to have in your code?";
+    cin >> digits;
+    cout << "What would you like your range of numbers to be?";
+    cin >> range;
+    Code mastercode(digits, range);  //instantiates our secret code based on input from user
+
+    for (int i = 0; i < digits; i++)
+    {
+        cout << "Please input your guess for value "<<i<<"\n";
         cin >> responseNumber;
-        guess.push_back(responseNumber);
+        guess.push_back(responseNumber); //inserts guess value into vector index i
     }
-    int numcorrect = mastercode.checkCorrect(guess);
-    int numincorrect = mastercode.checkIncorrect(guess);
-    cout<<"There were "<<numcorrect<<" correct numbers in their correct location, and "<<numincorrect<<" numbers in their incorrect location. \n";
+    int numcorrect = mastercode.checkCorrect(guess); //determines how many numbers were in the right position
+    int numincorrect = mastercode.checkIncorrect(guess); //determines how many numbers were in the wrong position
+    cout << "There were " << numcorrect << " correct numbers in their correct location, and";
+    cout << "there were " << numincorrect << " numbers in their incorrect location. \n";
     
 };
