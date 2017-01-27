@@ -66,7 +66,7 @@ int main(){
     //get parameters from user
     cout << "How many digits would like to have in your code: ";
     cin >> length;
-    cout << "What is the largest number you wish to have in your code: ";
+    cout << "What is the range of numbers you wish to have in your code: ";
     cin >> range;
     cout << endl;
 
