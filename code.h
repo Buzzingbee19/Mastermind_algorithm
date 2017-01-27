@@ -31,8 +31,8 @@ public:
     //constructor
     GuessCode(int n, int m, vector<long> code);
     
-    //retrieve code vector - only applies to guesss codes
-    vector<long> getCode();
+    //retrieve code vector - only applies to guess codes
+    vector<long> getCode() const;
     
 };
 
@@ -47,4 +47,4 @@ private:
 };
 
 
-#endif /* Code_h */
+#endif //end of header file for code

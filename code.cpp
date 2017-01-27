@@ -36,7 +36,7 @@ GuessCode::GuessCode(int n, int m, vector<long> code) : Code(n,m)
     this->code = code;
 }
 
-vector<long> GuessCode::getCode()
+vector<long> GuessCode::getCode() const
 //retrieve code vector - only applies to guess codes
 {
     return this->code;
@@ -53,12 +53,11 @@ vector<long> SecretCode::generateCode()
 //generate random code to be stored in the secretCode private field
 {
     vector<long> code; //creates empty code vector
-    randomNumber num = randomNumber(9); //instantiates randomNumber object
+    randomNumber num = randomNumber(1234); //instantiates randomNumber object
     
     //create random numbers in desired range and assignes them to code vector
     for (int i = 0; i < this->n; i++)
     {
-        //int num = rand() % this->m;
         long number = num.random(this->m);
         code.push_back(number);
     }
@@ -87,23 +86,14 @@ int SecretCode::checkIncorrect(GuessCode guess)
 //number of digits in the guess in the code but in the incorrect position
 {
     int incorrect = 0;
-    vector<long> secretIndices; //tracks counted indices in secret code
-    vector<long> guessIndices; //tracks counted indices in guess code
-    
     vector<long> modSecret;
     vector<long> modGuess;
-    
-    //find which indices were covered in checkCorrect
-//    for (int i = 0; i < this->n; i++) {
-//        if (this->code[i] == guess.getCode()[i]) {
-//            secretIndices.push_back(i);
-//            guessIndices.push_back(i);
-//        }
-//    }
-    
-    for (int i = this->n - 1; i >= 0; i--)
+
+    //for (int i = this->n - 1; i >= 0; i--)
+    for (int i = 0; i < this->n; i++)
     {
-        if(this->code[i] != guess.getCode()[i]) {
+        if(this->code[i] != guess.getCode()[i])
+        {
             modSecret.push_back(this->code[i]);
             modGuess.push_back(guess.getCode()[i]);
         }
@@ -111,53 +101,23 @@ int SecretCode::checkIncorrect(GuessCode guess)
     }
     
     int guessSize = modGuess.size();
-    
+
     //moves through elements in the guess to see if they are in secret code
-    for (int i = 0; i < guessSize; i++)
+    for (int i = guessSize - 1; i >= 0; i--)
+    //for (int i = 0; i < guessSize; i++)
     {
-        //check if this index has been checking in the guess code
-//        bool guessChecked = false;
-//        for(int a = 0; a < guessIndices.size(); a++) {
-//            if (i == guessIndices[a])
-//                guessChecked = true;
-//        }
-        
-        //if this has been checked, skip this guess index
-//        if (guessChecked)
-//            continue;
-        
-        //check it any of secretCode's elements match guess[i]
-        // ignore elements in secretCode that have already been counted
-        
         int secretSize = modSecret.size();
-        
-        for (int j = 0; j < secretSize; j++)
+
+        for (int j = secretSize - 1; j >= 0; j--)
         {
-            //ensure that j is not one of the indices that has been checked
-//            bool secretChecked = false;
-//            for (int a = 0; a < secretIndices.size(); a++) {
-//                if (j == secretIndices[a])
-//                    secretChecked = true; //this index was used
-//            }
-            
-            //skip j index if it has been used
-//            if (secretChecked)
-//                continue;
-            
-            //if same digit found in different indices
-            //  add secretCode index to checked vector
-            //  increment incorrect variable
-            //  break from loop to avoid double counting
-            if (modGuess[i] == modSecret[j]) {
+            if (modGuess[i] == modSecret[j])
+            {
                 modGuess.erase(modGuess.begin() + i);
                 modSecret.erase(modSecret.begin() + j);
-//                secretIndices.push_back(j);
                 incorrect++;
                 break;
             }
         }
     }
-    
-    //return number of incorrect
-    return incorrect;
+    return incorrect; //return number of incorrect
 } //end checkIncorrect

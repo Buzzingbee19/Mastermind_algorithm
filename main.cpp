@@ -22,15 +22,10 @@ int main(){
     SecretCode testSecret = SecretCode(5, 10);
     
     //set up automatic guesses
-    //  long guessOneArray[] = {5, 0, 3, 2, 6};
-    //    long guessTwoArray[] = {2, 1, 2, 2, 2};
-    //    long guessThreeArray[] = {1, 3, 3, 4, 5};
-    
-    
     long guessOneArray[] = {0, 7, 4, 0, 7};
     long guessTwoArray[] = {7, 4, 0, 7, 0};
     long guessThreeArray[] = {1, 2, 4, 7, 7};
-    
+
     vector<long> guessVOne(guessOneArray, guessOneArray + 5);
     vector<long> guessVTwo(guessTwoArray, guessTwoArray + 5);
     vector<long> guessVThree(guessThreeArray, guessThreeArray + 5);
@@ -39,50 +34,37 @@ int main(){
     GuessCode guessCodeTwo = GuessCode(5,10,guessVTwo);
     GuessCode guessCodeThree = GuessCode(5,10,guessVThree);
     
-    
     //check correctness
     cout << "\nresponse format: [correct digit in correct position, ";
     cout << "correct digit in wrong position]\n" << endl;
-    //    cout << "guess:       (5, 0, 3, 2, 6) -> ";
-    //    cout << "[" << myCode.checkCorrect(guessOne) << ",";
-    //    cout << myCode.checkIncorrect(guessOne) << "]" << endl;
-    //    cout << "guess:       (2, 1, 2, 2, 2) -> ";
-    //    cout << "[" << myCode.checkCorrect(guessTwo) << ",";
-    //    cout << myCode.checkIncorrect(guessTwo) << "]" << endl;
-    //    cout << "guess:       (1, 3, 3, 4, 5) -> ";
-    //    cout << "[" << myCode.checkCorrect(guessThree) << ",";
-    //    cout << myCode.checkIncorrect(guessThree) << "]" << endl;
-    
-    
+
     //for testing using random seed "9"
-    //gives secret code 0, 7, 4, 0, 7
     cout << "secret code: ";
     testSecret.printCode();
     cout << endl << endl;
-    
+
     cout << "guess:        ";
     guessCodeOne.printCode();
-    cout << "-> ";
+    cout << " -> ";
     cout << "[" << testSecret.checkCorrect(guessCodeOne) << ",";
     cout << testSecret.checkIncorrect(guessCodeOne) << "]" << endl;
-    
+
     cout << "guess:        ";
     guessCodeTwo.printCode();
-    cout << "-> ";
+    cout << " -> ";
     cout << "[" << testSecret.checkCorrect(guessCodeTwo) << ",";
     cout << testSecret.checkIncorrect(guessCodeTwo) << "]" << endl;
     
     cout << "guess:        ";
     guessCodeThree.printCode();
-    cout << "-> ";
+    cout << " -> ";
     cout << "[" << testSecret.checkCorrect(guessCodeThree) << ",";
     cout << testSecret.checkIncorrect(guessCodeThree) << "]" << endl;
     
     cout << endl << "testing complete\n\n";
     cout << "Now, time to make a new code and take your own guess!\n\n";
-    
-    
-    
+
+
     //Taking your own guess
     long responseNumber;
     int range, length;  //initialize the variables for user input
@@ -100,9 +82,7 @@ int main(){
     cout << "This is your secret code: ";
     yourSecret.printCode();
     cout << "\nTest our code with a guess!\n";
-    
-    
-    
+
     //get guess from user
     cout << "input your guess numbers: \n";
     vector<long> input;
