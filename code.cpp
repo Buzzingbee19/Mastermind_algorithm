@@ -85,13 +85,15 @@ int SecretCode::checkCorrect(GuessCode guess)
 int SecretCode::checkIncorrect(GuessCode guess)
 //number of digits in the guess in the code but in the incorrect position
 {
-    int incorrect = 0;
-    vector<long> modSecret;
+    int incorrect = 0;  //initializes number of incorrectly located digis
+    vector<long> modSecret; //modifiable vector to preserve original vectors
     vector<long> modGuess;
 
     //for (int i = this->n - 1; i >= 0; i--)
     for (int i = 0; i < this->n; i++)
     {
+        //determines if guess was in correct location.  If not, adds guess and
+        //secret to vectors from before to be used later.
         if(this->code[i] != guess.getCode()[i])
         {
             modSecret.push_back(this->code[i]);
@@ -99,17 +101,20 @@ int SecretCode::checkIncorrect(GuessCode guess)
         }
         
     }
-    
+
+    //number of remaining digits which weren't equivalent to the secret code
     int guessSize = modGuess.size();
 
     //moves through elements in the guess to see if they are in secret code
     for (int i = guessSize - 1; i >= 0; i--)
-    //for (int i = 0; i < guessSize; i++)
     {
         int secretSize = modSecret.size();
 
         for (int j = secretSize - 1; j >= 0; j--)
         {
+            //If a guess value is found in the remaining secret code
+            //values, it erases each value from respective vectors,
+            //and increments the incorrect counter
             if (modGuess[i] == modSecret[j])
             {
                 modGuess.erase(modGuess.begin() + i);
