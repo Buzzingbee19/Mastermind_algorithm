@@ -1,47 +1,65 @@
 //
-// Created by Patrick on 1/26/17.
+//  response.cpp
+//  MastermindPartB
+//
+//  Created by Adam Bechtold on 1/28/17.
+//  Copyright © 2017 Adam Bechtold. All rights reserved.
 //
 
-#include <vector>
 #include "response.h"
-#include <iostream>
-using namespace std;
 
-Response::Response (vector<int> input)
-{
-    vector <int> guess(input);
-    this -> guesssize = guess.size();
-    int guessvals(guesssize);
-    getguessvals(guess);
-};
 
-template <typename T>
-void Response::getguessvals(vector<T> x)
+Response::Response(int numCorrect, int numIncorrect)
+//constructor for Response class
 {
-    vector<int> temp(x);
+    this->numCorrect = numCorrect;
+    this->numIncorrect = numIncorrect;
+}
 
-    for (int i = guesssize-1; i >= 0; i--)
-    {
-        setguessvals(temp.back(), i);
-        temp.pop_back();
-    }
-};
-void Response::setguessvals(int set, int index)
+void Response::setNumCorrect(int a)
+//set the numCorrect field of the Response object
 {
-    guessvals[index]=set;
-};
+    this->numCorrect = a;
+}
 
-bool Response::operator== (vector <int> compare)
+void Response::setNumIncorrect(int a)
+//set the numIncorrect field of the Response object
 {
-    if (guess == compare)
-        return 1;
-    else
-        return 0;
-};
+    this->numIncorrect = a;
+}
 
-template <typename T>
-T Response::operator<<(T y)
+
+int Response::getNumCorrect()
+//return the numCorrect field of the Response object
 {
-    std::cout<<y;
-    return 0;
-};
+    return this->numCorrect;
+}
+
+
+int Response::getNumIncorrect()
+//return the numIncorrect field of the Response object
+{
+    return this->numIncorrect;
+}
+
+
+ostream& operator<< (ostream& ostr, const Response& r)
+//operator overload for << in Response objects
+{
+    ostr << "[" << r.numCorrect << "," << r.numIncorrect << "]";
+    return ostr;
+}
+
+bool operator == (const Response &lhs, const Response &rhs)
+//operator overload for ==
+{
+    return (lhs.numIncorrect == rhs.numIncorrect && lhs.numCorrect == rhs.numCorrect);
+}
+
+
+
+//bool Response::operator== (const Response& lhs, const Response& rhs)
+////overload the == operator
+//{
+//    return (lhs.numCorrect == rhs.numCorrect && lhs.numIncorrect == rhs.numIncorrect);
+//}

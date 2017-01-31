@@ -25,7 +25,7 @@ protected:
     int m;
     vector<long> code;
 };
-    
+
 class GuessCode: public Code {
 public:
     //constructor
@@ -47,4 +47,4 @@ private:
 };
 
 
-#endif //end of header file for code
+#endif //end of header file for code class

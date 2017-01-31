@@ -1,3 +1,4 @@
+
 //  This is the implementation file for our code class.  This file executes the
 //  functions our main file will use to generate the random code,  compare
 //  the guess made by the player, and return the number of guesses that are
@@ -8,6 +9,7 @@
 #include <vector>
 #include "code.h"
 #include "d_random.h"
+
 using namespace std;
 
 Code::Code(int n, int m)
@@ -49,6 +51,8 @@ SecretCode::SecretCode(int n, int m) : Code(n,m)
     this->code = generateCode();
 }
 
+
+
 vector<long> SecretCode::generateCode()
 //generate random code to be stored in the secretCode private field
 {
@@ -67,6 +71,7 @@ vector<long> SecretCode::generateCode()
 } //end of generateCode function
 
 
+
 int SecretCode::checkCorrect(GuessCode guess)
 //return the number of digits that are in the correct posistion
 {
@@ -82,13 +87,15 @@ int SecretCode::checkCorrect(GuessCode guess)
     return correct;
 } //end of checkCorrect function
 
+
+
 int SecretCode::checkIncorrect(GuessCode guess)
 //number of digits in the guess in the code but in the incorrect position
 {
     int incorrect = 0;  //initializes number of incorrectly located digis
     vector<long> modSecret; //modifiable vector to preserve original vectors
     vector<long> modGuess;
-
+    
     //for (int i = this->n - 1; i >= 0; i--)
     for (int i = 0; i < this->n; i++)
     {
@@ -101,16 +108,16 @@ int SecretCode::checkIncorrect(GuessCode guess)
         }
         
     }
-
+    
     //number of remaining digits which weren't equivalent to the secret code
-    int guessSize = modGuess.size();
-
+    long guessSize = modGuess.size();
+    
     //moves through elements in the guess to see if they are in secret code
-    for (int i = guessSize - 1; i >= 0; i--)
+    for (long i = guessSize - 1; i >= 0; i--)
     {
-        int secretSize = modSecret.size();
-
-        for (int j = secretSize - 1; j >= 0; j--)
+        long secretSize = modSecret.size();
+        
+        for (long j = secretSize - 1; j >= 0; j--)
         {
             //If a guess value is found in the remaining secret code
             //values, it erases each value from respective vectors,

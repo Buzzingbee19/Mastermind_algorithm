@@ -1,33 +1,48 @@
 //
-// Created by Patrick on 1/27/17.
+//  mastermind.hpp
+//  MastermindPartB
+//
+//  Created by Adam Bechtold on 1/28/17.
+//  Copyright © 2017 Adam Bechtold. All rights reserved.
 //
 
-#ifndef MASTERMIND_ALGORITHM_MASTERMIND_H
-#define MASTERMIND_ALGORITHM_MASTERMIND_H
+#ifndef mastermind_h
+#define mastermind_h
 
-#include <vector>
 #include "code.h"
-using namespace std;
+#include "response.h"
+#include <stdio.h>
 
-class Mastermind
-{
+
+class Mastermind {
+    
 public:
-    Mastermind ();
-    Mastermind(int length, int digits);
-    void printCode();
-
-private:
-    void humanGuess();
-    void getResponse();
-    void isSolved();
+    //constructor for values read from keyboard
+    Mastermind(int n, int m);
+    
+    //constructor using default values
+    Mastermind();
+    
+    //prints secret code
+    void printSecret();
+    
+    //read guess and return GuessCode object
+    GuessCode humanGuess();
+    
+    //given two codes, return Response object
+    Response getResponse(GuessCode guess);
+    
+    //does this response mean the game has been solved?
+    bool isSolved(Response r);
+    
+    //iniitalize random code, print it to screen, and plays game with user
     void playGame();
-    friend SecretCode Secret;
-    friend GuessCode Guess;
+    
+private:
+    SecretCode secret;
     int n;
     int m;
-    int correct;
-    int incorrect;
 };
 
 
-#endif //MASTERMIND_ALGORITHM_MASTERMIND_H
+#endif //end of the mastermind header file

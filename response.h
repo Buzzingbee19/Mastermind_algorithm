@@ -1,27 +1,48 @@
 //
-// Created by Patrick on 1/26/17.
+//  response.h
+//  MastermindFinal
+//
+//  Created by Adam Bechtold on 1/30/17.
+//  Copyright © 2017 Adam Bechtold. All rights reserved.
 //
 
-#ifndef MASTERMIND_ALGORITHM_RESPONSE_H
-#define MASTERMIND_ALGORITHM_RESPONSE_H
+#ifndef response_h
+#define response_h
 
-#include <vector>
+#include <stdio.h>
+#include <iostream>
+
 using namespace std;
-template <typename T>
 
 class Response
 {
 public:
-    Response (vector<int> input);
-    T operator<< (T y);  //operator overloading to make a print statement
-    bool operator== (vector <int> compare);
-
+    //constructor
+    Response(int numCorrect, int numIncorrect);
+    
+    //sets the numCorrect field of the Response object
+    void setNumCorrect(int a);
+    
+    //sets the numIncorrect field of the Response object
+    void setNumIncorrect(int a);
+    
+    //return the numCorrect value of the Response object
+    int getNumCorrect();
+    
+    //return the numIncorrect value of the Response object
+    int getNumIncorrect();
+    
+    
+    //overload << operator - to print the response accuracy
+    friend ostream& operator<< (ostream& ostr, const Response& r);
+    
+    //overload == operator - to compare to Response objects
+    friend bool operator == (const Response &lhs, const Response &rhs);
+    
 private:
-    void getguessvals(vector<T> x);
-    void setguessvals(int set, int index);
-    vector <int> guess();
-    int guesssize;
-    int guessvals[];
+    int numCorrect; //number of digits in the correct position
+    int numIncorrect; //number of digits in the incorrect position
 };
 
-#endif //MASTERMIND_ALGORITHM_RESPONSE_H
+
+#endif /* response_h */
