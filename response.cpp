@@ -1,10 +1,14 @@
+// Project 1b
+// Adam Bechtold and Patrick Buzza
 //
-//  response.cpp
-//  MastermindPartB
-//
-//  Created by Adam Bechtold on 1/28/17.
-//  Copyright © 2017 Adam Bechtold. All rights reserved.
-//
+// cpp file for the Resposne class.
+// Implements the methods declared in the header file response.h including:
+//  - a Constructur
+//  - setNumCorrect
+//  - setNumIncorrect
+//  - getNumCorrect
+//  - getNumIncorrect
+//  - overloaded operators == and <<
 
 #include "response.h"
 
@@ -55,11 +59,3 @@ bool operator == (const Response &lhs, const Response &rhs)
 {
     return (lhs.numIncorrect == rhs.numIncorrect && lhs.numCorrect == rhs.numCorrect);
 }
-
-
-
-//bool Response::operator== (const Response& lhs, const Response& rhs)
-////overload the == operator
-//{
-//    return (lhs.numCorrect == rhs.numCorrect && lhs.numIncorrect == rhs.numIncorrect);
-//}

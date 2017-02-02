@@ -1,10 +1,17 @@
+// Project 1b
+// Adam Bechtold and Patrick Buzza
 //
-//  mastermind.cpp
-//  MastermindPartB
+// cpp file for the Mastermind class.
 //
-//  Created by Adam Bechtold on 1/28/17.
-//  Copyright © 2017 Adam Bechtold. All rights reserved.
-//
+// Implements the methods declared in the Mastermind header file
+// including:
+//  - a Constructor with user defined values
+//  - a Constructor with default values
+//  - printSecret
+//  - humanGuess
+//  - getResponse
+//  - isSolved
+//  - playGame
 
 #include <vector>
 
@@ -17,8 +24,6 @@ using namespace std;
 Mastermind::Mastermind(int n, int m) : secret(5, 10)
 //constructor if handed values to modify code type
 {
-//    SecretCode secret1 = SecretCode(n,m);
-//    this->secret = secret1;
     this->secret = SecretCode(n, m);
     this->n = n;
     this->m = m;
@@ -29,8 +34,6 @@ Mastermind::Mastermind() : secret(5, 10)
 {
     this->n = 5;
     this->m = 10;
-//    SecretCode secret1 = SecretCode(5, 10);
-//    this->secret = secret1;
     this->secret = SecretCode(5, 10);
 }
 
@@ -48,9 +51,8 @@ GuessCode Mastermind::humanGuess()
     //initialize variables
     vector<long> guess;
     int input;
-    
+
     //get guess from user
-    //cout << "input your guess numbers: \n";
     for (int i = 0; i < this->n; i++)
     {
         cout << ": ";
@@ -58,7 +60,7 @@ GuessCode Mastermind::humanGuess()
         guess.push_back(input); //inserts number into guess vector
     }
     cout << endl;
-    
+
     GuessCode guessCode = GuessCode(this->n, this->m, guess);
     return guessCode;
 }
@@ -68,7 +70,7 @@ Response Mastermind::getResponse(GuessCode guess)
 {
     int numCorrect = this->secret.checkCorrect(guess);
     int numIncorrect = this->secret.checkIncorrect(guess);
-    
+
     return Response(numCorrect, numIncorrect);
 }
 
@@ -82,35 +84,33 @@ bool Mastermind::isSolved(Response r)
 void Mastermind::playGame()
 // initialize random code, print it to screen, and play game with user
 {
-    
-    
     //print secret code to screen
     cout << "\nOK. For testing purposes, we'll show you your secret code:\n";
     this->printSecret();
     cout << endl;
-    
+
     //tell user how many attempts they have
     int guessLimit = 10;
     cout << "You have " << guessLimit << " rounds to beat the code.\n\n";
-    
+
     //explain feedback format
     cout << "Remember, the format of your feedback is:\n"
     << "[# completely correct digits, # right digits in the wrong spots]\n";
-    
+
     //take guesses from users
     for (int i = 0; i < guessLimit; i++) {
         //prompt human for guess
         cout << "Input your guess\n";
-        
+
         //take guess
         GuessCode guess = this->humanGuess();
-        
+
         //get response
         Response r = this->getResponse(guess);
-        
+
         //print reposne
         cout << "Accuracy: " << r << endl;
-        
+
         //if this is correct, leave game
         if (this->isSolved(r)) {
             //exit message
@@ -120,8 +120,8 @@ void Mastermind::playGame()
             cout << "Play again to see if it was more than a fluke!\n\n";
             break;
         }
-        
-        //if it's not a winner
+
+        //if it's not a winner and this was the last guess
         else if (i == guessLimit - 1) {
             //exit message
             cout << "\n\nI hate to say it (enter to continue)";
@@ -139,8 +139,9 @@ void Mastermind::playGame()
             cin.ignore();
             break;
         }
-        
+
         //take the next guess
         cout << "next guess: ";
     }
 }
+// end of the mastermind.cpp file

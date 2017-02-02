@@ -1,10 +1,21 @@
-
-//  This is the implementation file for our code class.  This file executes the
-//  functions our main file will use to generate the random code,  compare
-//  the guess made by the player, and return the number of guesses that are
-//  correct and those that are correct but in the wrong spot.
+// Project 1b
+// Adam Bechtold and Patrick Buzza
 //
-//  Adam Bechtold & Patrick Buzza
+// cpp file for the Code class.
+//
+// Implements the methods decleared in the header file including:
+//
+// All Code objects:
+//  - printCode
+//
+// GuesCode:
+//  - Constructor with code parameters and specific vector
+//  - getCode
+//
+// SecretCode:
+//  - checkCorrect
+//  - checkIncorrect
+//  - generateCode
 
 #include <vector>
 #include "code.h"
@@ -58,14 +69,14 @@ vector<long> SecretCode::generateCode()
 {
     vector<long> code; //creates empty code vector
     randomNumber num = randomNumber(1234); //instantiates randomNumber object
-    
+
     //create random numbers in desired range and assignes them to code vector
     for (int i = 0; i < this->n; i++)
     {
         long number = num.random(this->m);
         code.push_back(number);
     }
-    
+
     //return secret code for allocation to private secretCode field
     return code;
 } //end of generateCode function
@@ -76,7 +87,7 @@ int SecretCode::checkCorrect(GuessCode guess)
 //return the number of digits that are in the correct posistion
 {
     int correct = 0;
-    
+
     //count the number of digits that are in the same position in the guess
     // and the secret code
     for (int i = 0; i < this->n; i++)
@@ -95,7 +106,7 @@ int SecretCode::checkIncorrect(GuessCode guess)
     int incorrect = 0;  //initializes number of incorrectly located digis
     vector<long> modSecret; //modifiable vector to preserve original vectors
     vector<long> modGuess;
-    
+
     //for (int i = this->n - 1; i >= 0; i--)
     for (int i = 0; i < this->n; i++)
     {
@@ -106,17 +117,18 @@ int SecretCode::checkIncorrect(GuessCode guess)
             modSecret.push_back(this->code[i]);
             modGuess.push_back(guess.getCode()[i]);
         }
-        
+
     }
-    
+
     //number of remaining digits which weren't equivalent to the secret code
     long guessSize = modGuess.size();
-    
+
     //moves through elements in the guess to see if they are in secret code
     for (long i = guessSize - 1; i >= 0; i--)
     {
         long secretSize = modSecret.size();
-        
+
+        //move through the elements of the temporary secret code vector
         for (long j = secretSize - 1; j >= 0; j--)
         {
             //If a guess value is found in the remaining secret code
